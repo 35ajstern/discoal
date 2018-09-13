@@ -54,8 +54,11 @@ int main(int argc, const char * argv[]){
 	i = 0;
         totalSimCount = 0;
 	currentTrajectory = malloc(sizeof(float) * TRAJSTEPSTART);
+	if(!currentTrajectory){fprintf(stderr, "out of memory allocating currentTrajectory");}
 	assert(currentTrajectory);
-
+	currentTrajectoryTime = malloc(sizeof(float) * TRAJSTEPSTART);
+    	if(!currentTrajectoryTime){fprintf(stderr, "out of memory allocating currentTrajectoryTime");}
+	assert(currentTrajectoryTime);
 	while(i < sampleNumber){
 		currentTime=0;
 		nextTime=999;
