@@ -128,6 +128,12 @@ int main(int argc, const char * argv[]){
 					probAccept = proposeTrajectory(currentEventNumber, currentTrajectory, currentSize, sweepMode, currentFreq, &currentFreq, alpha, f0, currentTime);
 					//printf("probAccept: %lf\n",probAccept);
 				}
+					
+			// print trajectory here
+                	printf("\n//\nFrequency Trace:\n\n");
+                	for(k = 0; k < totalTrajectorySteps; k++){
+                    		printf("%f\t%f\t%f\n", currentTrajectoryTime[k], currentTrajectory[k], 1.0-currentTrajectory[k]);
+			}
 				
 				currentTime = sweepPhaseEventsConditionalTrajectory(&breakPoints[0], currentTime, nextTime, sweepSite, \
 					 currentFreq, &currentFreq, &activeSweepFlag, alpha, currentSize, sweepMode, f0, uA);
@@ -234,7 +240,7 @@ int main(int argc, const char * argv[]){
 			dropMutationsUntilTime(uTime);	
 
 		if(condRecMode == 0){
-			if(treeOutputMode == 1){
+
 				//output newick trees
 				qsort(breakPoints, breakNumber, sizeof(breakPoints[0]), compare_floats);
 				lastBreak = 0;
@@ -250,15 +256,11 @@ int main(int argc, const char * argv[]){
 				}
 				printf("[%d]",nSites- lastBreak);
 				printTreeAtSite(1.0 - (1.0/nSites)); 
-
-			}
-			else{
 				//Hudson style output
 				//errorCheckMutations();
 				makeGametesMS(argc,argv);
-			}
-			//printf("rep: %d\n",i);
-                        i++;
+				//printf("rep: %d\n",i);
+                        	i++;
 		}
 		else{
 			if(condRecMet == 1){
