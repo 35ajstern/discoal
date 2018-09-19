@@ -957,7 +957,7 @@ double initialFreq, double *finalFreq, double alpha, double f0, double currentTi
 				exit(1);
 			}
 			currentTrajectory[j]=x;
-			currentTrajectoryTime[j++]=currentTime+ttau;
+			currentTrajectoryTime[j++]=currentTime+tIncOrig;
 		}
 	}
 	currentTrajectoryStep=0;
@@ -1352,7 +1352,7 @@ double *sizeRatio, char sweepMode,double f0, double uA)
 
 
 		}
-
+		if(cTime+ttau >= endTime) return(cTime+ttau);
 		//Decide which event took place
 		//first was it in population 0 (sweep) or not
 		if(ranf() < sweepPopTotRate / totRate){
